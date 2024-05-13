@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Cuotas</title>
+</head>
+<body>
+    <h1>Listado de Cuotas</h1>
+    <ul>
+        {% for cuota in cuotas %}
+        <li>
+            <strong>Monto:</strong> {{ cuota.monto }} - 
+            <strong>Fecha de Vencimiento:</strong> {{ cuota.fecha_vencimiento }} - 
+            <strong>Estado de Pago:</strong> {{ cuota.estado_pago }}
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'clientes:crear_cuota' %}" class="btn btn-primary">Crear Nueva Cuota</a>
+</body>
+</html>

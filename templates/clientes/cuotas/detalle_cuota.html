@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de Venta</title>
+</head>
+<body>
+    <h1>Detalle de Venta</h1>
+    <p><strong>Cliente:</strong> {{ venta.cliente }}</p>
+    <p><strong>Proyecto:</strong> {{ venta.proyecto }}</p>
+    <p><strong>Subproyecto:</strong> {{ venta.subproyecto }}</p>
+    <p><strong>Precio de Venta:</strong> {{ venta.precio_venta }}</p>
+    <p><strong>Forma de Pago:</strong> {{ venta.forma_pago }}</p>
+    <p><strong>Cuotas:</strong> {{ venta.cuotas }}</p>
+
+    <h2>Cuotas</h2>
+    <ul>
+        {% for cuota in cuotas %}
+            <li>
+                <strong>Monto:</strong> {{ cuota.monto }} -
+                <strong>Fecha de Vencimiento:</strong> {{ cuota.fecha_vencimiento }} -
+                <strong>Estado de Pago:</strong> {{ cuota.estado_pago }}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

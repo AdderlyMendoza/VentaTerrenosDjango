@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+{% load static %}
+{% load tags_extras %}
+
+{% block content %}
+
+<div class="page-wrapper">
+    <!-- Empieza accesos directos -->
+    <div class="container-fluid">
+        <div class="row page-titles">
+            <div class="col-md-5 align-self-center">
+                <h3 class="text-themecolor">Lista de Proyectos</h3>
+            </div>
+            <div class="col-md-7 align-self-center">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="">Panel</a></li>
+                    <li class="breadcrumb-item">proyectos</li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-11">
+                                <h4 class="card-title"><span class="lstick m-r-20"></span>Proyectos</h4>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="users" class="table m-t-30 table-hover no-wrap contact-list" data-page-size="10">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Estado</th>
+                                        <th>Lugar</th>
+                                        <th>Dirección</th>
+                                        <th>Tipo</th>
+                                        <th>Precio de Compra</th>
+                                        <th>Precio de Venta</th>
+                                        <th>Observación</th>
+                                        
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="font-size: 14px; font-weight: 400;">
+                                    {% for proyecto in proyectos %}
+                                    <tr>
+                                        <td>
+                                            <a href="">{{proyecto.nombre}}</a>
+                                        </td>
+                                        <td>{{ proyecto.estado }}</td>
+                                        <td>{{ proyecto.lugar }}</td>
+                                        <td>{{ proyecto.direccion }}</td>
+                                        <td>{{ proyecto.tipo }}</td>
+                                        <td>{{ proyecto.precio_compra }}</td>
+                                        <td>{{ proyecto.precio_venta }}</td>
+                                        <td>{{ proyecto.observacion }}</td>
+                                        
+                                        <td>
+                                            
+
+                                            <a href="{% url 'proyectos:editar_proyecto' proyecto.pk %}">
+                                                <i class="fa fa-edit" style="color: blue;"></i>
+                                            </a> 
+
+                                            <a href="{% url 'proyectos:eliminar_proyecto' proyecto.pk %}">
+                                                <i class="fa fa-trash" style="color: red; margin-left: 5px;"></i>
+                                            </a>
+                                        </td>
+                                       
+                                    </tr>
+
+                                    
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+   
+
+    <a id="add" href="{% url 'proyectos:crear_proyecto' %}" data-toggle="tooltip" data-placement="left" title="Crear nuevo proyecto" class="btn btn-info btn-circle fa fa-plus"></a>
+
+    <style>
+        .img-activo {
+            margin-left: -10px;
+            border: 2px solid #72BE53;
+        }
+
+        .img-desactivado {
+            margin-left: -10px;
+            border: 2px solid #BE5653;
+        }
+
+        #add {
+            position: fixed;
+            bottom: 60px;
+            right: 20px;
+            animation: scale 1.2s infinite;
+        }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#users').DataTable({
+                "language": {
+                    "lengthMenu": "Mostar _MENU_ documentos",
+                    "zeroRecords": "Sin coincidencias",
+                    "info": "Pagina _PAGE_ de _PAGES_",
+                    "infoEmpty": "Sin registros disponibles",
+                    "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                    "search": "Buscar"
+                },
+
+                "ordering": false,
+                "info": false,
+                "paging": false,
+            });
+        });
+    </script>
+
+    <!-- Termina accesos directos -->
+
+    <a href="" style="text-decoration: none;">
+        <footer class="footer">© Link-P</footer>
+    </a>
+</div>
+
+
+
+{% endblock content %}

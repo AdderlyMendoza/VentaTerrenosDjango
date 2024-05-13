@@ -1,0 +1,184 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="shortcut icon" href="{% static 'img/LinkIco21.ico' %}" />
+    <title>Link-P</title>
+    <!-- Bootstrap Core CSS -->
+    <!-- <link href="{% static 'adminpro/assets/plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet"> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+    <link href="{% static 'adminpro/main/css/spinners.css' %}" rel="stylesheet">
+
+
+</head>
+
+<body class="card-no-border">
+    <div class="preloader">
+        <div class="loader">
+            <div class="loader__figure"></div>
+            <p class="loader__label">Link-P</p>
+        </div>
+    </div>
+
+    <div
+        style="background:url({% static 'img/link-fondo.png' %}) 10% 25% ; background-size: cover;  height: 100vh; opacity: 90%;">
+        <div class="d-flex justify-content-center align-self-center p-4" style="height: 100vh;">
+
+            <div class="bg-dark-blue rounded col-8 col-md-6 col-lg-3">
+                <form id="loginform" method="POST">
+                    {% csrf_token %}
+                    <div class="p-4">
+                        <div class="text-center mb-2">
+                            <img src="{% static 'img/Linkpblanco.png' %}" alt="" style="width: 150px;">
+                        </div>
+
+                        <div class="my-5">
+                           <h3 class="text-white">¡Bienvenido Inmobiliaria MONACO¡</h3>
+                        </div>
+                        <div class="my-3">
+                            <div class="mt-4">
+                                <input class="login" type="text" required placeholder="Usuario" name="username"
+                                    id="username">
+                            </div>
+                            <div class="mt-4">
+                                <input class="login" type="password" required placeholder="Contraseña"
+                                    name="password">
+                            </div>
+                        </div>
+                        <div class="my-4 d-flex align-items-center text-center">
+                                <input id="checkbox-signup" type="checkbox" class="filled-in chk-col-light-blue" value="lsRememberMe">
+                                <span class="recuerdame">Recuerdame</span>
+                             <a href="javascript:void(0)" id="to-recover" class="text-dark pull-right"></a>
+                        </div>
+                        <div class="text-center">
+                            <div>
+                                <input class="btn btn-block btn-light btn-rounded" type="submit"
+                                    onclick="lsRememberMe()" value="Acceder" style="width: 100px;"></input>
+                            </div>
+                        </div>
+                        <div class="text-center mt-4">
+                            <a class="recuperar" href="">¿Perdiste tu contraseña?</a>
+                        </div>
+
+                        {% block content %}
+
+                        {% endblock %}
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<style>
+    .bg-dark-blue {
+        background-color: #18232E;
+    }
+
+    input[type=text] {
+        background-color: rgba(0, 0, 0, 0);
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: white 1px linear;
+        color: white;
+        width: 100%;
+
+    }
+
+    input[type=password] {
+        background-color: rgba(0, 0, 0, 0);
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: white 1px linear;
+        color: white;
+        width: 100%;
+
+    }
+    input:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0px 1000px #18232E inset;
+        -webkit-text-fill-color: white;
+    }
+
+    input::placeholder {
+        color: rgba(255, 255, 255, 0.6);
+    }
+    input:focus {
+        outline: none !important;
+    }
+
+    .recuerdame{
+        color: white;
+        margin-left: 8px;
+    }
+
+    .recuperar{
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .fondo{
+        background: url("linkp.html") center top cover ;
+    }
+
+</style>
+
+<script src="{% static 'adminpro/assets/plugins/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap tether Core JavaScript -->
+<script src="{% static 'adminpro/assets/plugins/bootstrap/js/popper.min.js' %}"></script>
+<script src="{% static 'adminpro/assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--Custom JavaScript -->
+<script type="text/javascript">
+    $(function () {
+        $(".preloader").fadeOut();
+    });
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    });
+    
+    $('#to-recover').on("click", function () {
+        $("#loginform").slideUp();
+        $("#recoverform").fadeIn();
+    });
+</script>
+
+<script>
+    const rmCheck = document.getElementById("checkbox-signup"),
+        emailInput = document.getElementById("username");
+
+    if (localStorage.checkbox && localStorage.checkbox !== "") {
+        rmCheck.setAttribute("checked", "checked");
+        emailInput.value = localStorage.username;
+    } else {
+        rmCheck.removeAttribute("checked");
+        emailInput.value = "";
+    }
+
+    function lsRememberMe() {
+        if (rmCheck.checked && emailInput.value !== "") {
+            localStorage.username = emailInput.value;
+            localStorage.checkbox = rmCheck.value;
+        } else {
+            localStorage.username = "";
+            localStorage.checkbox = "";
+        }
+    }
+</script>
+
+
+
+</html>

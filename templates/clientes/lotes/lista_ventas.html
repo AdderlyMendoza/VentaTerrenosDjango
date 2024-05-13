@@ -1,0 +1,57 @@
+
+
+{% extends "base.html" %}
+{% load static %}
+{% load tags_extras %}
+
+{% block content %}
+
+<div class="page-wrapper">
+
+    <div class="container-fluid ">
+        <div class="row page-titles">
+            <div class="col-md-5 align-self-center">
+                <h3 class="text-themecolor">Lista de Lotes</h3>
+            </div>
+
+            <div class="col-md-7 align-self-center">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="">Panel</a></li>
+                    <li class="breadcrumb-item">lotes separados</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">
+                    
+                   
+
+
+                        <a class="btn" href="{% url 'clientes:crear_venta' %}">
+                    
+                            <img src="{% static 'img/iniciar-sesion.png' %}" alt="" style="max-width:20px; height:auto; vertical-align: middle;">
+                            
+                        </a> Base de datos</h4>
+                <h6 class="card-subtitle">Estas constantes actualizan las variables pesificadas en la BBDD</code></h6>
+                <div class="table-responsive">
+                    <table class="table">
+                        <ul>
+                            {% for venta in ventas %}
+                            <li><a href="{% url 'clientes:ver_venta' venta.id %}">{{ venta }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    
+{% endblock %}

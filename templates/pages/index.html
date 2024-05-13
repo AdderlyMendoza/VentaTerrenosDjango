@@ -1,0 +1,264 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load tags_extras %}
+
+
+<body class="fix-header fix-sidebar card-no-border">
+
+  
+    {% block content %}
+
+    
+    <div class="page-wrapper">
+  
+      {% include 'includes/home/guia_usuario.html' %}
+  
+      
+  
+      <div class="container-fluid r-side">
+        <div class="row page-titles">
+          <div class="col-md-12 col-lg-9 col-xl-9 d-flex align-self-center justify-content-between">
+            <h3 class="text-themecolor">{{mensaje_bievenida}}</h3>
+           
+            <a href="#" data-toggle="modal" data-target="#ModalGuia" id="guia-icono"><i class="fa fa-lg fa-info-circle mt-2"></i></a>
+          
+          </div>
+        </div>
+  
+        
+
+        <div class="row" id="guiamedia">
+          <div class="card">
+            <div class="card-body">
+  
+              <div class="row">
+                <div class="col-3">
+                  <img src="{% static 'img/car2.jpg' %}" class="bounce animated"
+                    style="width: 100%; height:auto; vertical-align: middle; margin-right: 10px;">
+                </div>
+  
+                <div class="col-6">
+                  <h4 class="card-title">eres nuevo en la empresa o querés conocer mejor linkp?</h4>
+                  <p>Generamos un recorrido para que puedas conocer las funciones básicas y la organización del sitio.
+                  </p>
+                  <p>Inicia <a href="#" data-toggle="modal" data-target="#ModalGuia">aquí</a> tu explicación y guia
+                    del sitio.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+  
+        <!-- empieza accesos directos -->
+        <div class="row">
+          <div class="col-12 col-lg-12">
+            <div class="mb-4 ">
+              <div class="">
+                <div class="row d-flex" style="gap: 32px;">
+  
+                
+                  <div
+                    class="col-5 col-md-3 col-lg-2 shadow-sm bg-body border text-center d-flex justify-content-center align-items-center"
+                    style="height: 120px;">
+                    <a href="{{atajo.url}}">
+                      <img src=""
+                        style="max-width:75px; height:auto;">
+                      <p style="font-size: 14px;" class="mt-1"></p>
+                    </a>
+                    <div class="btn-group ml-auto" style="position: absolute; top: 10px; right: 10px;">
+                      <a href="JavaScript:void(0)" class="icon-options-vertical link text-info" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false"></a>
+                      <div class="dropdown-menu dropdown-menu-right">
+                        <form method="POST">
+                          
+                          <button class="btn" type="submit" name="atajo_delete" value=""><i class="fa fa-trash mr-2"></i>Quitar</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+  
+                 
+                  
+                 
+                  <div
+                    class="col-5 col-md-3 col-lg-2 shadow-sm bg-light  border text-center d-flex justify-content-center align-items-center"
+                    style="height: 120px;">
+                    <a href="#" data-toggle="modal" data-target="#ModalAccDir">
+                      <i class="fa fa-2x fa-plus-circle mt-2"></i>
+                      <p style="font-size: 14px;">Acceso directo</p>
+                    </a>
+                  </div>
+  
+            
+  
+                  <div id="ModalAccDir" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalAccDir"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header" style="background-color: #2a3e52;">
+                          <h5 class="modal-title  text-light" id="exampleModalLongTitle">Agregar Acceso directo</h5>
+                          <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <form method="POST">
+                       
+                            <div class="tab-content">
+                              <p>¿Qué acceso directo te gustaría colocar?</p>
+                            </div>
+                            <select name="atajo_entrar" class="form-control mt-2">
+                       
+                              <option value=""></option>
+                          
+  
+                            </select>
+                            <button type="submit" class="btn btn-info mt-4" >Agregar</button>
+                          </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-info" data-dismiss="modal">Cerrar</button>
+  
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="ModalAccDirEditar" class="modal fade" tabindex="-1" role="dialog"
+                    aria-labelledby="ModalAccDirEditar" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header" style="background-color: #2a3e52;">
+                          <h5 class="modal-title  text-light" id="exampleModalLongTitle">Modificar Acceso directo</h5>
+                          <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <form action="POST">
+                            <div class="tab-content">
+                              <p>¿Qué acceso directo te gustaría colocar?</p>
+                            </div>
+                            <select name="accesos" class="form-control mt-2">
+                              <option value="1">Acceso1</option>
+                              <option value="2">Acceso2</option>
+                              <option value="3">Acceso3</option>
+                              <option value="4">Acceso4</option>
+                            </select>
+                            <button type="button" class="btn btn-info mt-4" type="submit" name="editar"
+                              value="">Editar</button>
+                          </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-info" data-dismiss="modal">Cerrar</button>
+  
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+    </div>
+  
+        <div class="row">
+          <div class="col-12 col-lg-9">
+            <div class="card">
+              <div class="card-body">
+                <div>
+                  <h4 class="card-title"><span class="lstick"></span>Nuestro equipo</h4>
+                </div>
+    
+                <div class="table-responsive">
+                  <table class="table">
+                    <tbody>
+    
+               
+                      <tr>
+                        <td><img class="img-circle img-profile" src="{% static 'img/anonimo2.png' %}"alt="user" width="50"></td>
+                        <td>
+                          <h6><b></b> -  </h6><small
+                            class="text-muted">: - </small>
+                        </td>
+                      </tr>
+    
+                  
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+  
+        <aside class="right-side-panel" id="panelnovedades-guia">
+  
+          <h3 class="p-relative"><span class="lstick"></span> Novedades</h3>
+  
+          <div class="row">
+            <div class="col-md-12 m-t-10">
+              <div class="card">
+                <a type="button" style="text-decoration: none;" data-toggle="modal" data-target="#ModalAnuncio">
+                  <img class="card-img-top img-responsive" src="" alt="Novedad">
+                </a>
+    
+                <div class="card-body">
+                  <h3 class="font-normal"></h3>
+                
+                  <span class="label label-success label-rounded">Comunidad Link</span>
+         
+                  <span class="label label-danger label-rounded">Proyectos</span>
+             
+                  <span class="label label-info label-rounded">Link-P anuncios</span>
+               
+                  <p class="m-b-0 m-t-20"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+    
+          <!-- Modal anuncio -->
+          <div class="modal fade" id="ModalAnuncio" tabindex="-1" role="dialog" aria-labelledby="ModalPremioTitle"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+    
+                  <img class="card-img-top img-responsive" src="" alt="Card image cap"
+                    style="width: 465px; height: auto; ">
+    
+                </div>
+              </div>
+            </div>
+          </div>
+         
+    
+        </aside>
+  
+      </div>
+  
+        
+  
+        <a href="" style="text-decoration: none;">
+          <footer class="footer">© Link-P</footer>
+        </a>
+  
+      
+  
+  
+    </div>
+
+
+  
+{% endblock content %}
+</body>

@@ -1,0 +1,266 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load tags_extras %}
+
+
+<body class="fix-header fix-sidebar card-no-border">
+
+  
+    {% block content %}
+
+    
+    <div class="page-wrapper">
+  
+    
+        <!-- empieza accesos directos -->
+
+        <div class="container-fluid r-aside">
+            <div class="row page-titles">
+                <div class="col-md-5 align-self-center">
+                    <h3 class="text-themecolor">Proyectos</h3>
+                </div>
+        
+                <div class="col-md-7 align-self-center">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="">Inicio</a></li>
+                        <li class="breadcrumb-item">Panel</li>
+                    </ol>
+                </div>
+            </div>
+        
+            <div class="row">
+                <div class="col-lg-3 col-xlg-3">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <div>
+                                <h6><b>Lista de proyectos</b></h6>
+                            </div>
+            
+                            <div>
+                                <img src="{% static 'img/DatosPersonal.png' %}" alt="" style="max-width:70px; height:auto; margin: 20px;">
+                            </div>
+            
+                    
+            
+
+                            <a href="{% url 'proyectos:listar_proyectos' %}"><button class="btn btn-info">
+
+                      
+                             Ingresar</button></a>
+             
+            
+                            <a href="#"><button class="btn btn-secondary">
+                                Sin permisos</button></a>
+                          
+            
+                        </div>
+            
+                    </div>
+                </div>
+            
+                <div class="col-lg-3 col-xlg-3">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <div>
+                                <h6><b>Sub Proyectos</b></h6>
+                            </div>
+            
+                            <div>
+                                <img src="{% static 'img/Linkcoins.png' %}" alt="" style="max-width:100px; height:auto; margin: 5px;">
+                            </div>
+            
+             
+                            <a href="{% url 'proyectos:subproyectos' %}"><button class="btn btn-info">
+                                    Ingresar</button></a>
+            
+ 
+            
+                            <a href="#">
+                                <button class="btn btn-secondary">Sin permisos</button></a>
+               
+            
+                        </div>
+            
+                    </div>
+                </div>
+        
+                <div class="col-lg-3 col-xlg-3">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <div>
+                                <h6><b>Separar lotes </b></h6>
+                            </div>
+            
+                            <div>
+                                <img src="{% static 'img/rrhh_files.png' %}" alt="" style="max-width:100px; height:auto; margin: 5px;">
+                            </div>                   
+            
+        
+                            <a href=""><button class="btn btn-success">
+                                Ingresar</button></a>
+      
+
+      
+                            <a href="#">
+                                <button class="btn btn-secondary">Sin permisos</button></a>
+            
+        
+                        </div>
+            
+                    </div>
+                </div>
+
+                
+        
+            </div>
+
+            <div class="row">
+              <div class="col-lg-3 col-xlg-3">
+                  <div class="card">
+                      <div class="card-body text-center">
+                          <div>
+                              <h6>lotes disponibles</h6>
+                          </div>
+          
+                          <div>
+                              <img src="{% static 'img/checkOC.png' %}" alt="" style="max-width:100px; height:auto; margin: 5px;">
+                          </div>
+          
+                        
+                          <a href=""><button class="btn btn-dark">
+                                  Ingresar</button></a>
+                          
+          
+                          <a href="#"><button class="btn btn-secondary">
+                              Sin permisos</button></a>
+                          
+                      </div>
+          
+                  </div>
+              </div>
+          
+              <div class="col-lg-3 col-xlg-3">
+                  <div class="card">
+                      <div class="card-body text-center">
+                          <div>
+                              <h6>lotes separados</h6>
+                          </div>
+          
+                          <div>
+                              <img src="{% static 'img/analisisperiodos.png' %}" alt="" style="max-width:100px; height:auto; margin: 5px;">
+                          </div>
+                          
+                          <a href=""><button class="btn btn-info">
+                                  Ingresar</button></a>
+                          
+          
+                          <a href="#"><button class="btn btn-secondary">
+                              Sin permisos</button></a>
+                          
+                      </div>
+          
+                  </div>
+              </div>
+  
+              <div class="col-lg-3 col-xlg-3">
+                  <div class="card">
+                      <div class="card-body text-center">
+                          <div>
+                              <h6>lotes vendidos</h6>
+                          </div>
+          
+                          <div>
+                              <img src="{% static 'img/contratos.png' %}" alt="" style="max-width:100px; height:auto; margin: 5px;">
+                          </div>
+          
+                     
+                          <a href=""><button class="btn btn-primary">
+                                  Ingresar</button></a>
+                       
+          
+                          <a href="#"><button class="btn btn-secondary">
+                              Sin permisos</button></a>
+                         
+                      </div>
+                  </div>
+              </div>
+          
+    
+          </div>
+        </div>
+        
+       
+  
+        <aside class="right-side-panel" id="panelnovedades-guia">
+  
+          <h3 class="p-relative"><span class="lstick"></span> reportes</h3>
+  
+          <div class="row">
+            <div class="col-md-12 m-t-10">
+              <div class="card">
+                <a type="button" style="text-decoration: none;" data-toggle="modal" data-target="#ModalAnuncio">
+                  <img class="card-img-top img-responsive" src=" {% static 'img/33635-worker-have-an-idea.gif' %}" alt="Novedad">
+                </a>
+    
+                <div class="card-body">
+                  <h3 class="font-normal"></h3>
+                
+                  <span class="label label-success label-rounded">Comunidad Link</span>
+         
+                  <span class="label label-danger label-rounded">Proyectos</span>
+             
+                  <span class="label label-info label-rounded">Link-P anuncios</span>
+               
+                  <p class="m-b-0 m-t-20"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+    
+          <!-- Modal anuncio -->
+          <div class="modal fade" id="ModalAnuncio" tabindex="-1" role="dialog" aria-labelledby="ModalPremioTitle"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+    
+                  <img class="card-img-top img-responsive" src="" alt="Card image cap"
+                    style="width: 465px; height: auto; ">
+    
+                </div>
+              </div>
+            </div>
+          </div>
+         
+    
+        </aside>
+  
+      </div>
+
+      
+  
+        
+  
+        <a href="" style="text-decoration: none;">
+          <footer class="footer">© Link-P</footer>
+        </a>
+  
+      
+  
+  
+    </div>
+
+
+  
+{% endblock content %}
+</body>
+
+
+

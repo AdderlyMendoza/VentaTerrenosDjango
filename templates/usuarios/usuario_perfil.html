@@ -1,0 +1,340 @@
+{% extends "base.html" %}
+
+
+{% load static %}
+
+{% block content %}
+
+
+<div class="container-fluid">
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h3 class="text-themecolor">Editar personal</h3>
+        </div>
+        <div class="col-md-7 align-self-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="">Panel</a></li>
+                <li class="breadcrumb-item"><a href="">Datos personal</a></li>
+                <li class="breadcrumb-item">Personal</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body bg-light">
+                <div class="row">
+                   
+                    <div class="col-lg-4 col-xlg-3 col-md-5">
+                        <div class="card">
+                            <div class="card-body">
+                                
+                                <center class="m-t-30">
+                                    {% if data.imagenlogo %}
+                                    <img src="{{data.imagenlogo.url}}" class="img-circle" width="150" />
+                                    {% else %}
+                                    <img src="{% static 'img/anonimo2.png' %}" class="img-circle" width="150" />
+                                    {% endif %}
+                                    <h4 class="card-title m-t-10 {% if data.estado == 'ACTIVO' %}text-success{% else %}text-danger{% endif %}">{{data.estado|lower|capfirst}}</h4>
+                                    <h4 class="card-title m-t-10">{{data.nombre}}</h4>
+                                    <h6 class="card-subtitle">{{data.area}} - {{data.cargo}}</h6>
+
+                                </center>
+                            </div>
+                            <div>
+                                <hr> </div>
+                            <div class="card-body">
+                                 <small class="text-muted">Email corporativo</small>
+                                <h6>{{data.email}}</h6>
+                                 <small class="text-muted p-t-30 db">Telefono</small>
+                                <h6>{{data.Telefono}}</h6>
+                                 <small class="text-muted p-t-30 db">Fecha nacimiento</small>
+                                <h6>{{data.fecha_nacimiento|date:'d-m-Y'}}</h6>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-xlg-9 col-md-7">
+                        <div class="card">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs profile-tab" role="tablist">
+                                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#datos" role="tab">Datos</a> </li>
+                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#settings" role="tab">Editar</a> </li>
+                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#permisos-usuario" role="tab">Permisos</a> </li>
+                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#baja" role="tab">Baja y alta del usuario</a> </li>
+                              
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+
+                                <div class="tab-pane active" id="datos" role="tabpanel">
+                                    <div class="card-body">
+                                        <h4>Datos generales</h4>
+                                        <p>Ingreso a LINK: {{data.fecha_ingreso|date:'d-m-Y'}}</p>
+                                        <h6>Comentarios</h6>
+                                        <p style="white-space: pre-wrap;">{{data.Comentarios}}</p>
+
+                                    </div>
+                                </div>
+                                
+                                <div class="tab-pane" id="settings" role="tabpanel">
+                                    <div class="card-body">
+                                        <form method="POST">
+                                            {% csrf_token %}
+                                            <div class="form-group">
+                                                <label class="col-md-12">Nombre</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" value="{{data.nombre}}"  class="form-control form-control-line" name="nombre">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="example-email" class="col-md-12">Email</label>
+                                                <div class="col-md-12">
+                                                    <input type="email" value="{{data.email}}" class="form-control form-control-line" name="email">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-12">Área</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" value="{{data.area}}" class="form-control form-control-line" name="area">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-12">Cargo</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" value="{{data.cargo}}" class="form-control form-control-line" name="cargo">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-md-12">Telefono</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" value="{{data.Telefono}}" class="form-control form-control-line" name="telefono">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-12">Fecha de nacimiento</label>
+                                                <div class="col-md-12">
+                                                    <input type="date" value="{{data.fecha_nacimiento|date:'Y-m-d'}}"  class="form-control form-control-line" name="fecha_nacimiento">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-12">Fecha de ingreso</label>
+                                                <div class="col-md-12">
+                                                    <input type="date" value="{{data.fecha_ingreso|date:'Y-m-d'}}"  class="form-control form-control-line" name="fecha_ingreso">
+                                                </div>
+                                            </div>
+                                
+                                            <div class="form-group">
+                                                <label class="col-md-12">Comentarios</label>
+                                                <div class="col-md-12">
+                                                    <textarea rows="5" class="form-control form-control-line" name="comentarios">{{data.Comentarios}}</textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <button name="actualizar-usuario"  class="btn btn-success">Actualizar</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                             
+                                <div class="tab-pane" id="permisos-usuario" role="tabpanel">
+                                    <div class="card-body">
+                                  <div class="row">
+                                      <div class="col-11">
+                                        <h4>Panel de permisos</h4>
+                                        <p>Seleccionar todos los permisos que otorgaras al usuario</p>
+                                      </div>
+                                      <div class="col-1">
+                                        <a href=" {% url 'Permisos' %} " ><i class="fa fa-info-circle fa-lg"></i></a>
+                                      </div>
+                                  </div>
+                                        <form action="" method="POST"> {% csrf_token %}
+                                            <div class="row d-flex">
+                                                {% for perm  in permisos  %}
+
+                                                <div class="col-6 my-2">
+                                                       
+                                                    {% if data|has_perm:perm %}
+                                                    <input type="checkbox" name="{{perm}}" id="{{perm}}" class="form-control"  checked>
+                                                    <label for="{{perm}}">{{perm|lower|capfirst}}: {{perm.description|lower|capfirst}}</label>
+                                                    {% else %}
+                                                    <input type="checkbox" name="{{perm}}" id="{{perm}}" class="form-control">
+                                                    <label for="{{perm}}">{{perm|lower|capfirst}}: {{perm.description|lower|capfirst}}</label>
+                                                    {% endif %}
+
+                                                    
+
+                                                </div>
+                                                {% endfor %}
+
+                                            </div>
+                                            <div class="mt-3">
+                                                <div>
+                                                    <button type="submit" name="gestionar-permisos" value="{{data.identificacion}}" class="btn btn-primary">Actualizar</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane" id="baja" role="tabpanel">
+                                    <div class="card-body">
+                                       <form method="post">{% csrf_token %}
+                                    <h4 class="card-title m-t-10 {% if data.estado == 'ACTIVO' %}text-success{% else %}text-danger{% endif %}">{{data.estado|lower|capfirst}}</h4>
+                                      
+
+                                           {% if data.estado == 'ACTIVO' %}
+                                           <div class="alert alert-danger" role="alert">
+                                            Recuerda que si desactivas este usuario no podra ingresar al sistema hasta que sea dado de alta otra vez
+                                           </div>   
+                                           <button class="btn btn-danger" type="submit" name="baja-alta" value="{{data.id}}">
+                                               Desactivar este usuario
+                                            </button>
+                                            {% else %}
+                                            <div class="alert alert-danger" role="alert">
+                                                Recuerda que si activas este usuario podra ingresar al sistema con todos los permisos que tenia asignado
+                                               </div>  
+                                            <button class="btn btn-success" type="submit" name="baja-alta" value="{{data.id}}">
+                                                Activar este usuario
+                                             </button>
+                                            {% endif %}
+                                      
+                                       </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+<script>
+   
+
+      
+     
+{% if codigo %}
+    
+    {% if codigo == 1  %}
+    
+    
+    const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3100,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+      })
+          Toast.fire({
+                  title:'Se actualizo con exito el usuario' , 
+                  icon: 'success',
+    
+              })
+
+
+    {% elif codigo == 2 %}
+    
+    
+    const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3100,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+      })
+    Toast.fire({
+          title: 'Se dio de baja el usuario con exito' , 
+          icon: 'success',
+    
+      })
+
+      {% elif codigo == 3 %}
+    
+    
+    const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3100,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+      })
+    Toast.fire({
+          title: 'Se activo el usuario con exito' , 
+          icon: 'success',
+    
+      })
+    
+      {% elif codigo == 4 %}
+    
+    
+    const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3100,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+      })
+    Toast.fire({
+          title: 'Se modificaron los permisos con exito' , 
+          icon: 'success',
+    
+      })
+    
+    {% else %}
+    
+    
+    const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3100,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+      })
+    Toast.fire({
+          title: 'No se pudo realizar la accion solicitada' , 
+          icon: 'error',
+    
+      })
+    
+    {% endif %}
+      
+    
+    {% endif %}
+ 
+
+</script>
+{% endblock %}
