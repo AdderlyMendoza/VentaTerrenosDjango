@@ -74,19 +74,6 @@
   
   </style>
 
-
-  <script>
-    function agregarFillNegro() {
-      var paths = document.querySelectorAll('svg#miSVG path');
-      paths.forEach(function (path) {
-        path.setAttribute('style', 'stroke-width:8');
-        path.setAttribute('class', 'path-hover');
-        // path.setAttribute('title', 'PRECIO: 10000 dolares AREA: 120M2');
-        // path.setAttribute('data-toggle', 'tooltip');
-      });
-    }
-  </script>
-
   <form role="form" enctype="multipart/form-data" action="" method="POST" id="upload-image-form" class="p-4">
     {% csrf_token %}
     <div class="card" style="width: 75%; margin-left: 12%; margin-top: 2%;">
@@ -94,7 +81,20 @@
       <!-- PASO 1 -->
       <fieldset id="step1">
         <div class="card-header p-4">
-          <h3>Paso 1: Selecciona tus terrenos</h3>
+          <div class="container">
+            <div class="row">
+              <div class="col-8">
+                <h3>Paso 1: Selecciona tus terrenos</h3>
+              </div>
+              <div class="col-4" style="text-align: end;">
+                <button type="button" class="btn btn-primary">
+                  <a href="#" class="text-white" style="text-decoration: none;">
+                    <h4>Ver plano</h4>
+                  </a>
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="card-body flex items-center justify-center position-relative">
@@ -1571,6 +1571,9 @@
     </div>
   </form>
 
+
+  <hr>
+
   <!-- Seleccionar ID de los path -->
   <script>
     // Lista de IDs seleccionados
@@ -1673,7 +1676,34 @@
 
 
   <!-- Colorear los terrenos separados -->
+  {% block script %}
+  <script>
+      var pathsColorear = document.querySelectorAll('svg path');
+      var ids = [];
   
+      pathsColorear.forEach(function(path) {
+          var id = path.getAttribute('id');
+          ids.push(id);
+      });
+      
+      {% for terreno in terrenos %}
+        var terrenoSplit = "{{ terreno }}".split(','); // Separar los elementos por coma
+        terrenoSplit.forEach(function(element) {
+          var trimmedElement = element.trim();
+          console.log(trimmedElement); // Imprimir cada elemento del terreno
+          if (ids.includes(trimmedElement)) {
+            var pathEncontrado = document.getElementById(trimmedElement);
+            if (pathEncontrado) { // Verificar si se encontró el elemento
+              pathEncontrado.setAttribute("fill", "yellow"); // Cambiar el atributo fill al nuevo color
+              pathEncontrado.style.pointerEvents = "none"; // Desactivar el cursor
+            } else {
+              console.log("¡Path no encontrado!"); // Manejar el caso donde no se encuentra el elemento
+            }
+          }
+        });
+      {% endfor %}
+  </script>
+{% endblock %}
 
 
 </body>

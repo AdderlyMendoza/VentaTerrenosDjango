@@ -1,5 +1,4 @@
-from django.shortcuts import render
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from .models import *
 from .forms import formularioWeb
 # Create your views here.
@@ -17,9 +16,11 @@ def separar_lote(request):
             return redirect("web:pag_web") # redd a una pag que diga que ya se separo xd
     else:
         form = formularioWeb()
-         
-    return render(request, "web/separar_lote.html", {'form': form})
 
+        # Obtener solo los valores de la columna 'terrenos' desde la base de datos
+        terrenos = Web.objects.values_list('terrenos', flat=True)
+              
+    return render(request, "web/separar_lote.html", {'form': form, 'terrenos': terrenos}) # enviamos el form y los terrenos
 
 
 def listar(request):
